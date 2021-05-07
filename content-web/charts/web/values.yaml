@@ -5,8 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: [LOGINSERVER]/content-web
+  repository: fabmedicaljzc.azurecr.io/content-web
   pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: "web"
@@ -15,9 +17,13 @@ fullnameOverride: "web"
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
+  # Annotations to add to the service account
+  annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name:
+  name: ""
+
+podAnnotations: {}
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -47,7 +53,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources:
+resources: 
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -56,8 +62,15 @@ resources:
   #   cpu: 100m
   #   memory: 128Mi
   requests:
-    cpu: 1000m
+    cpu: 100m
     memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
