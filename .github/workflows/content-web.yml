@@ -111,6 +111,7 @@ jobs:
         helm chart pull ${{ env.containerRegistry }}/helm/content-web:v${{ env.tag }}
         helm chart export ${{ env.containerRegistry }}/helm/content-web:v${{ env.tag }} --destination ./upgrade
         helm upgrade web ./upgrade/web
+        kubectl delete pod -l app.kubernetes.io/instance=web
       env:
         KUBECONFIG: './kubeconfig'
         HELM_EXPERIMENTAL_OCI: 1
