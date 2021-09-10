@@ -110,7 +110,7 @@ jobs:
         helm registry login ${{ env.containerRegistry }} --username ${{ secrets.ACR_USERNAME }} --password ${{ secrets.ACR_PASSWORD }}
         helm chart pull ${{ env.containerRegistry }}/helm/content-web:v${{ env.tag }}
         helm chart export ${{ env.containerRegistry }}/helm/content-web:v${{ env.tag }} --destination ./upgrade
-        helm upgrade web ./upgrade/web
+        helm upgrade web ./upgrade/web --install
         kubectl delete pod -l app.kubernetes.io/instance=web
       env:
         KUBECONFIG: './kubeconfig'
