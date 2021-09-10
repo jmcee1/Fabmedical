@@ -15,7 +15,7 @@ on:
 env:
   imageRepository: 'content-init'
   resourceGroupName: 'Fabmedical-jzc'
-  containerRegistryName: 'fabmedicalJZC'
+  containerRegistryName: 'fabmedicaljzc'
   containerRegistry: 'fabmedicaljzc.azurecr.io'
   dockerfilePath: './content-init'
   tag: '${{ github.run_id  }}'
