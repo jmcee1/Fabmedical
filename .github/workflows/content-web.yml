@@ -96,6 +96,8 @@ jobs:
 
     - name: Helm Install
       uses: azure/setup-helm@v1
+      with:
+        version: 'v3.6.3'
 
     - name: kubeconfig
       run: echo "${{ secrets.KUBECONFIG }}" >> kubeconfig
